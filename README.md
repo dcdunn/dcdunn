@@ -1,4 +1,5 @@
-## Hi there 👋
+## 
+I'm a Lead Software Development Engineer currently woking at DisplayLink (UK) Ltd
 
 <!--
 **dcdunn/dcdunn** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

@@ -1,5 +1,7 @@
-## 
-I'm a Lead Software Development Engineer currently woking at DisplayLink (UK) Ltd
+##  I'm a Lead Software Development Engineer currently woking at DisplayLink (UK) Ltd
+
+### 📚&nbsp;Academic Publications
+In a different life was an academic researcher in various areas of Fluid Mechanics. You can find my research papers and academic contributions on [Google Scholar](https://scholar.google.com/citations?user=aaN_h4EAAAAJ&hl=en).
 
 <!--
 **dcdunn/dcdunn** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

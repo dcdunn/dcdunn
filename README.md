@@ -129,7 +129,7 @@ Bristol I learned and used both C++ and Python. The techniques included:
    thinking for an academic programmer, and I learned about version control
    systems and object-orientation (in C, but there you go) from him. 
    
-[^1] The imp devices that I worked on were
+[^1]: The imp devices that I worked on were
 [imp001](https://developer.electricimp.com/sites/default/files/attachments/hardware/datasheets/imp001_specification.pdf),
 [imp002](https://developer.electricimp.com/sites/default/files/attachments/hardware/datasheets/imp002_specification.pdf),
 [imp003](https://developer.electricimp.com/sites/default/files/2017-07/imp003_SPZV1CDJ_20161024.pdf),
@@ -137,7 +137,7 @@ Bristol I learned and used both C++ and Python. The techniques included:
 [imp005](https://developer.electricimp.com/sites/default/files/2017-07/imp005_SPUZ1GC_20170105.pdf),
 consisting of ARM Cortex M3, M4, R2 processors in for example an STM32F4 SoC.
 
-[^2] This pre-dated the idea of a [Device Twin](https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twins), used by Azure IoT Hub.
+[^2]: This pre-dated the idea of a [Device Twin](https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twins), used by Azure IoT Hub.
 
 <!--
 **dcdunn/dcdunn** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

@@ -265,11 +265,11 @@ care.
 If you got this far, here's [a link](https://github.com/dcdunn/asyncmatch#) to a
 port of the asynchronous test tools of Freeman & Pryce, written in Python.
 
-[^1] [How Electric Imp Tests Software Part I: Physical Test
+[^1]: [How Electric Imp Tests Software Part I: Physical Test
 Harness](docs/HowElectricImpTestsSoftware.pdf) was published on the Electric Imp
 website at the time. 
 
-[^2] If I knew then what I know now, I would have thought it was a good idea to
+[^2]: If I knew then what I know now, I would have thought it was a good idea to
 not even rely on the operating system. We had developed a decoupled architecture
 to support various OSes, such as Windows, Linux and MacOS, so we could have
 arranged to create a test suite that used a test double instead of a real OS.

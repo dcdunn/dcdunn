@@ -1,7 +1,20 @@
-# TIL: Test Automation is an Essential Skill
+# Test Automation of Asynchronous Subsystems
 
 TL;DR: if you want to become an expert system engineer, simultaneously, you
 have to become an expert in testing those systems.
+
+One thing I have learned is that a prerequisite for designing and delivering
+high-quality software systems - of any type - is a test-automation capability,
+and a good understanding of the hows and whys of such capabilities. This is an
+essay on one important and, in my experience, overlooked aspect of test
+automation: how to reliably test subsystems that operate asynchronously. Test
+automation is a central part of good continuous integration practice. I have
+come to strongly believe that without thinking carefully about test automation,
+it is much more difficult to build durable systems base on well-defined
+interfaces, good messaging protocols, tight responsibilities. I believe that the
+same principles apply to a good design of a cluser of C++ or Python classes
+(unit testing), through library and module desing up to a collection of cloud
+services. 
 
 One afternoon, Friday 15th October 2010 to be precise, my life as a software
 engineer was transformed by Steve Freeman and Nat Pryce. It was not as you might

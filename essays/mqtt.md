@@ -102,26 +102,77 @@ asynchronously.
 
 MQTT has strong Quality-of-Service (QoS) semantics. Each message is sent with a
 QoS level, and messages are guaranteed to be delivered at most once (QoS 0), at
-least once (QoS 1) or exactly once (QoS 2).
+least once (QoS 1) or exactly once (QoS 2). QoS 0 is 'fire-and-forget', and
+should be used if it is not very important that the message reaches its intended
+audience. Unlike TCP, QoS 1 and 2 guarantee that the application layer receives
+the message.
 
- * QoS 1 and 2 guarantee that the application layer has received the message.
- * The client has a _unique_ identity. This is crucial for IoT security. Two
-   clients with the same ID cannot connect to the same broker. The ID is also
-   used for session management, managing QoS guarantees and for resuming
-   sessions.  
- * Heartbeat
- * Last will and testament
- * Unreliable networks.
- 
- offline messaging support.
- 
-One last point. MQTT can be made secure. First, since it is based on TCP/IP, the
-socket can be wrapped with Transport Layer Security (TLS). 
+Under certain conditions, this guarantee can be met across network outages, the
+broker going offline, or even device power failures. A QoS 0 message is
+discarded as soon as it is sent.  However, QoS 1 and 2 messages are stored
+locally on the client, pending acknowledgement and may be resent to satisfy the
+QoS semantics. Depending on implementations, the persisted messages may be store
+in memory or in non-volatile storage. In IoT devices, resource constraints will
+dictate the amount of available storage of each type.  Messages sent or
+unacknowledged while the device is disconnected can be delivered if the
+connection resumes.
 
-  * Websockets
-  * Port blocking on enterprise networks
+As part of the connection protocol, clients can also request a _persistent
+session_. In this case, the broker stores information about the session,
+including the client's subscriptions, all unacknowledged QoS 1 and 2 messages,
+and any QoS 1 and 2 messages sent while the client is disconnected. If the
+client requests a persistent session (by setting the *cleanSession* flag to
+false in the connect options), the client must also set up the means to save
+session information. Finally, it is possible to set a flag for a 'retained
+message', in which case the broker will store the most recent message sent to a
+client, and will immediately send it when the client connects.
 
-The main IoT platform services, such as Azure IoT Hub, allow devices to connect via MQTT. 
+The MQTT protocol also provides a 'heartbeat' mechanism. In the connection
+handshake the client negotiates a _keep alive_ time. This is the maximum time
+allowed between messages sent by the client. If there is no message to send in
+the keep alive interval, then the client sends a _ping request_, and the broker
+sends a _ping response_ back. If the broker does not receive a ping request, it
+will close the  connection. This heartbeat overcomes a problem with TCP, which
+is that neither end of a TCP connection can detect if the other end has gone,
+leading to 'half-open' TCP connections. 
+
+A client may also create a "last will and testament" as part of the connection
+protocol.  If a broker detects that the client has disconnected, it will send
+the will message on the will topic. This helps IoT applications to keep an
+accurate view of what is happening in the their ecosystem.
+
+What about security? One of the precepts of IoT security is that communication
+between device and cloud is over a secure transport. The first precept of IoT
+device security is that each device has a _unique_ and _unforgeable_ identity.
+How that is acheived is not the subject of this essay, but MQTT is designed
+around this feature. Every MQTT client has a unique identity, and two clients
+with the same ID cannot connect to the same broker. The client ID is used for
+session management, managing QoS guarantees and for resuming sessions.  
+
+MQTT supports Transport Layer Security (TLS) handshakes and encrypted
+connections. During the handshake, the broker can ask the client for an X.509
+certificate, that is trusted by the broker. The broker can refuse to connect
+with a client whose identity cannot be authenticated in this way. In addition to
+X.509 authentication, MQTT provides the ability for a client to specify a
+username and password in the connect options.
+
+It is a good idea to insist on secure cipher suites for MQTT connections, and to
+use [_Perfect Forward
+Secrecy_](https://csrc.nist.gov/glossary/term/perfect_forward_secrecy) for
+connections. Under such schemes, ephemeral session keys are generated using
+algorithms such as [Elliptic Curve Diffie-Helman](). This means that if a
+session secret is lost, previous and future sessions are not compromised.
+
+I have presented some reasons why MQTT is a good protocol for IoT device-cloud
+communication:
+ * Secure connections;
+ * Long lived connections;
+ * Full duplex messaging;
+ * Asynchronous messaging;
+ * Quality-of-Service semantics;
+ * Good connection management;
+ * Last-Will and Testament.
+
 
 [^1]: The Synaptics Vision cloud uses RabbitMQ for internal messaging between
 services. RabbitMQ has an [MQTT plugin](https://www.rabbitmq.com/docs/mqtt),

@@ -73,7 +73,10 @@ to know about the consumers (subscribers). It does so by being a client-server
 protocol. MQTT is a _topic_ based messaging protocol. Clients _subscribe_ to
 topics they are interested in. Clients _publish_ messages on a _topic_, and the
 server arranges for the subscribers of that topic to recieve the message. For
-this reason the server is usually called the _MQTT broker_. 
+this reason the server is usually called the _MQTT broker_. The payload of
+published messages is binary, so there is no need for Base64 encoding, and the
+MQTT protocol is agnostic of the payload type. I have used JSON and Google's
+[Protocol Buffers](https://protobuf.dev/) as payload types.
 
 For example, suppose a device has ID _fred42_, once it is connected to a broker,
 it might subscribe to a topic _fred42/control/#_, where the _#_ is a wildcard -
@@ -160,7 +163,7 @@ It is a good idea to insist on secure cipher suites for MQTT connections, and to
 use [_Perfect Forward
 Secrecy_](https://csrc.nist.gov/glossary/term/perfect_forward_secrecy) for
 connections. Under such schemes, ephemeral session keys are generated using
-algorithms such as [Elliptic Curve Diffie-Helman](). This means that if a
+algorithms such as [Elliptic Curve Diffie-Helman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman). This means that if a
 session secret is lost, previous and future sessions are not compromised.
 
 I have presented some reasons why MQTT is a good protocol for IoT device-cloud
